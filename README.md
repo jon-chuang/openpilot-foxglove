@@ -3,7 +3,9 @@
 
 ### Build
 
-To build this project on Linux, you need to build the Capnproto WASM code objects with the following command in the `capnproto/c++` dir:
+To build this project on Linux, you need to first have the emscripten SDK installed.
+
+Next, build the Capnproto WASM code objects with the following command in the `capnproto/c++` dir:
 
 ```
 sudo bash -c "source ../../emsdk/emsdk_env.sh; emconfigure ./configure --host=wasm32 --disable-shared; emmake make -j6 check"
