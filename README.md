@@ -22,5 +22,5 @@ cp a.out.js ../../ui-viz/studio/packages/mcap-support/src/
 cp a.out.wasm ../../ui-viz/studio/packages/mcap-support/src/
 ```
 
-The branch can then import openpilot logs that have been serialized into mcap files using the scripts available in this repo.
+The branch can then import openpilot logs that have been serialized into mcap files using the scripts available in this repo. (you may try importing the resultant `out.mcap` file in the `rlog_to_mcap` subdir.
 
