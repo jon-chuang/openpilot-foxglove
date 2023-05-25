@@ -1,0 +1,67 @@
+<script src="a.out.js"></script>
+<input name="schema bin file", type="file" onchange="loadFile(this.files[0])">
+<input name="single message file", type="file" onchange="loadFile2(this.files[0])">
+<input name="rlog file" type="file" onchange="loadFile3(this.files[0])">
+<script>
+  var reader = new FileReader();
+  async function loadFile(file) {
+    reader.readAsArrayBuffer(file);
+  }
+  var reader2 = new FileReader();
+  async function loadFile2(file) {
+    reader2.readAsArrayBuffer(file);
+  }
+  var reader3 = new FileReader();
+  async function loadFile3(file) {
+    reader3.readAsArrayBuffer(file);
+  }
+  Module.onRuntimeInitialized = _ => {
+    const buffer_test = new Uint8Array([1, 0, 0, 0, 2, 0, 0, 0]);
+    console.log(Module.test(buffer_test))
+
+    var enc = new TextEncoder();
+
+    sampleMsgs = enc.encode(Module.buildSampleMessages());
+    schemas = Module.buildSampleSchemas();
+
+    console.log(sampleMsgs);
+    console.log(schemas);
+
+    var transcoder = new Module.SchemaTranscoder(schemas);
+
+    var jsons = transcoder.decodeMessagesToJson(sampleMsgs, 0);
+    console.log(jsons.get(0));
+    console.log(jsons.get(1));
+    console.log(jsons.get(2));
+
+    var transcoder;
+    reader.onload = function(e) {
+      const schemaBin = e.target.result;
+      var transcoder = new Module.CapnpTranscoder(schemaBin);
+      transcoder.setSchema("log.capnp:Event");
+      reader2.onload = function(e) {
+        if (transcoder == null) {
+          throw "Transcoder not yet loaded. Please upload a schema binary file first.";
+        }
+        const msgBin = e.target.result;
+        const eventJson = transcoder.transcodeJson(msgBin)
+        console.log(eventJson);
+        const event = transcoder.transcode(msgBin)
+        console.log(event);
+      }
+      reader3.onload = function(e) {
+        if (transcoder == null) {
+          throw "Transcoder not yet loaded. Please upload a schema binary file first.";
+        }
+        const msgsBin = e.target.result;
+        const events = transcoder.transcodeBatch(msgsBin)
+        for (var i=0; i<events.size(); i++) {
+          console.log(events.get(i));
+        }
+      }
+    }
+
+
+
+  };
+</script>
