@@ -3,7 +3,7 @@
 
 ### Build
 
-To build this project on Linux, you need to first have the emscripten SDK installed.
+To build this project on Linux, you need to first have the emscripten SDK installed and a local copy of the [Capnproto repo](https://github.com/capnproto/capnproto).
 
 Next, build the Capnproto WASM code objects with the following command in the `capnproto/c++` dir:
 
