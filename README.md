@@ -11,7 +11,7 @@ Next, build the Capnproto WASM code objects with the following command in the `c
 sudo bash -c "source ../../emsdk/emsdk_env.sh; emconfigure ./configure --host=wasm32 --disable-shared; emmake make -j6 check"
 ```
 
-Next, you may compile the glue script with the following command:
+Next, you may compile the glue script in `wasm.cpp` with the following command:
 
 ```
 emcc -I/usr/local/include ../capnproto/c++/.libs/libcapnp.a ../capnproto/c++/.libs/libkj.a ../capnproto/c++/.libs/libcapnp-json.a wasm.cpp --bind -sNO_DISABLE_EXCEPTION_CATCHING -sALLOW_MEMORY_GROWTH -sEXPORT_ES6 -sMODULARIZE -O3
