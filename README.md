@@ -17,7 +17,7 @@ Next, you may compile the glue script in `wasm.cpp` with the following command:
 emcc -I/usr/local/include ../capnproto/c++/.libs/libcapnp.a ../capnproto/c++/.libs/libkj.a ../capnproto/c++/.libs/libcapnp-json.a wasm.cpp --bind -sNO_DISABLE_EXCEPTION_CATCHING -sALLOW_MEMORY_GROWTH -sEXPORT_ES6 -sMODULARIZE -O3
 ```
 
-Finally, copy the resultant emscripten code objects (.js and wasm .a) into the `mcap-support` package in [our Foxglove studio branch](https://github.com/jon-chuang/studio/tree/jon/wasm-parse-capnproto):
+Finally, copy the resultant emscripten code objects (.js and wasm .a) into the `mcap-support` package in [this Foxglove studio branch](https://github.com/jon-chuang/studio/tree/jon/wasm-parse-capnproto):
 
 ```
 cp a.out.js ../../ui-viz/studio/packages/mcap-support/src/
